@@ -20,5 +20,7 @@ Smart Mirror using Springboot (backend) and Vue.js (frontend)
 
   ## DASHBOARD
   ![Dashboard](https://user-images.githubusercontent.com/55384710/106268702-7503fa00-6251-11eb-9bf6-d26bad4db65b.png)
-
+  ![dashboard_details](https://user-images.githubusercontent.com/55384710/106268833-a7adf280-6251-11eb-8630-       321eee6795d4.png)
+  ## CONTROL
+  
 
