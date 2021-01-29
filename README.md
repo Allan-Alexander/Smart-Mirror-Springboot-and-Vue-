@@ -26,6 +26,9 @@ Smart Mirror using Springboot (backend) and Vue.js (frontend)
 ![Dashboard_card](https://user-images.githubusercontent.com/55384710/106269231-433f6300-6252-11eb-8648-b9b9928d7320.png)
 
   ## CONTROL
+  
+  Mqtt consists of Publisher and Subscriber.<br>
+  
 ![Mqtt](https://user-images.githubusercontent.com/55384710/106269536-a0d3af80-6252-11eb-96dc-bd2aa47f73f4.png)
 
 ![Mqtt_details](https://user-images.githubusercontent.com/55384710/106269578-b21cbc00-6252-11eb-8049-a97d6b172fe8.png)
