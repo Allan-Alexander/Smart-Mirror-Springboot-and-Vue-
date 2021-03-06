@@ -17,10 +17,27 @@
       </div> 
         
 </v-container> 
+<div>
+  <v-carousel cycle hide-delimiters show-arrows-on-hover>
+    <v-carousel-item v-for="item in articles" :key="item.title">
+      <v-sheet :color="colors" height="100%" align="center" justify="center">
+        <v-row align="top" justify="center">
+          <div class="display-1">
+            {{ item.title }}
+            <br>
+            <br>
+            <span class="font-weight-light grey--text">{{ item.description }}</span>
+          </div>
+        </v-row>
+      </v-sheet>
+    </v-carousel-item>
+    </v-carousel>
+</div>
 </div>  
 </template>
 
 <script>
+import api from '../axios'
 import WeatherApp from '../components/WeatherApp'
 import Todo from '../components/Todo'
 export default {
@@ -34,8 +51,26 @@ export default {
   data() {
     return {
       date: new Date,
+      newsApi: [],
+      articles: [],
+      colors: '#121212'
   }
   },
+  methods: {
+      NewsApi(){
+            api.getNews().then(response =>{
+                this.newsApi = response.data
+                this.articles = this.newsApi.articles
+                console.log(response.data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+        },
+       },
+       beforeMount(){
+         this.NewsApi()
+       }
 
 }
 </script>
@@ -100,6 +135,13 @@ a {
 
 .todo {
   position: absolute;
+}
+
+.v-carousel .v-window-item {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  
 }
 
 </style>

@@ -149,8 +149,9 @@
 </template>
 
 <script>
-import api from '../axios';
-import axios from 'axios';
+import {db} from '../firebase'; 
+// import api from '../axios';
+// import axios from 'axios';
 export default {
   data(){
     return{
@@ -172,31 +173,41 @@ export default {
     }
   },
   methods:{
-    callTodoApi(){
-      api.getAllTodo().then(response =>{
-                   this.allTodo = response.data
-                   console.log(response.data)
-               })
-               .catch(error => {
-                   console.log(error)
-               })
+     async callTodoApi(){
+     // api.getAllTodo().then(response =>{
+     //              this.allTodo = response.data
+     //              console.log(response.data)
+     //          })
+     //          .catch(error => {
+     //              console.log(error)
+     //          })
+    const citiesRef = db.collection('allTodo');
+    const snapshot = await citiesRef.get();
+    snapshot.forEach(doc => {
+    this.allTodo.push({id: doc.id, heading: doc.data().heading, content: doc.data().content})  
+    console.log(this.allTodo);
+     });
     },
 
-    deleteTodoApi(id){
-      api.deleteTodo(id).then(response => console.log(response))
-         this.$router.go() 
+    async deleteTodoApi(id){
+      // api.deleteTodo(id).then(response => console.log(response))
+      //   this.$router.go() 
+      console.log(id);
+      await db.collection("allTodo").doc(id).delete();
+      this.$router.go()
     },
     
-    createTodoApi(){
+    async createTodoApi(){
       if(this.myTodo.heading.length > 25 || this.myTodo.content.length > 100 || this.myTodo.heading.length == 0 || this.myTodo.content.length == 0){
         alert("input beyond limit or empty");
       }else{
-      axios.post('http://localhost:9000/api/todo/create',this.myTodo
-             ).catch(e => {
-             console.log(e)
-             })
-             this.$router.go()
-
+      //axios.post('http://localhost:9000/api/todo/create',this.myTodo
+      //       ).catch(e => {
+      //       console.log(e)
+      //       })
+      //       this.$router.go()
+      await db.collection("allTodo").add(this.myTodo);
+      this.$router.go() 
      }
     }
   },

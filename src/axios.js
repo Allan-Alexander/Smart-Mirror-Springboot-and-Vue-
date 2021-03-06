@@ -19,6 +19,9 @@ export default{
     },
     deleteTodo(id){
         return AXIOS.delete('http://localhost:9000/api/todo/delete/'+id);
-    }
+    },
+    getNews(){
+        return AXIOS.get('http://newsapi.org/v2/top-headlines?country=in&apiKey=c82c749536ea43a7ad66b6e6d027891d');
+    },
 
 }
